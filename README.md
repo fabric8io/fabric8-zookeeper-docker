@@ -13,7 +13,7 @@ The easiest way to make use of this image is to use the "setup-ensemble.sh" scri
 	./setup-ensmble.sh 3 [docker ip]
 
 - To create a 5 server ensemble:
-	./setup-ensemble 5 [docker ip]
+	./setup-ensemble.sh 5 [docker ip]
 		
 and so on.
 
