@@ -25,16 +25,22 @@ if [ ! -z "$SERVER_ID" ]; then
   for i in `echo {1..15}`;do
 
     HOST=`envValue ZK_PEER_${i}_SERVICE_HOST`
-    PEER=`envValue ZK_PEER_${i}_SERVICE_PORT`
-    ELECTION=`envValue ZK_ELECTION_${i}_SERVICE_PORT`
+    PEER_HOST=`envValue ZK_PEER_${i}_SERVICE_HOST`
+    PEER_PORT=`envValue ZK_PEER_${i}_SERVICE_PORT`
+    ELECTION_HOST=`envValue ZK_ELECTION_${i}_SERVICE_HOST`
+    ELECTION_PORT=`envValue ZK_ELECTION_${i}_SERVICE_PORT`
 
-    if [ "$SERVER_ID" = "$i" ];then
+    if [ "$SERVER_ID" = "$i" ]; then
       echo "server.$i=0.0.0.0:2888:3888" >> conf/zoo.cfg
-    elif [ -z "$HOST" ] || [ -z "$PEER" ] || [ -z "$ELECTION" ] ; then
+    elif [ -z "$PEER_HOST" ] || [ -z "$ELECTION_HOST" ] || [ -z "$PEER_PORT" ] || [ -z "$ELECTION_PORT" ] ; then
       #if a server is not fully defined stop the loop here.
       break
+    elif [ -z "$USE_BRIDGE" ]; then 
+      echo "server.$i=$HOST:$PEER_PORT:$ELECTION_PORT" >> conf/zoo.cfg
     else 
-      echo "server.$i=$HOST:$PEER:$ELECTION" >> conf/zoo.cfg
+      echo "server.$i=127.0.1.$i:$PEER_PORT:$ELECTION_PORT" >> conf/zoo.cfg
+      socat TCP4-LISTEN:$PEER_PORT,bind=127.0.1.$i,fork TCP4:$PEER_HOST:$PEER_PORT &
+      socat TCP4-LISTEN:$ELECTION_PORT,bind=127.0.1.$i,fork TCP4:$ELECTION_HOST:$ELECTION_PORT &
     fi
 
   done

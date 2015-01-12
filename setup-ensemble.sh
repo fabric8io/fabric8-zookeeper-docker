@@ -22,6 +22,7 @@ function server_run_str() {
 
     echo "-e \"ZK_PEER_${i}_SERVICE_HOST=$HOST\""
     echo "-e \"ZK_PEER_${i}_SERVICE_PORT=$PEER_PORT\""
+    echo "-e \"ZK_ELECTION_${i}_SERVICE_HOST=$HOST\""
     echo "-e \"ZK_ELECTION_${i}_SERVICE_PORT=$ELECTION_PORT\""
   done
 

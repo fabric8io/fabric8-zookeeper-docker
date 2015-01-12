@@ -1,14 +1,16 @@
-FROM java
+FROM jboss/base-jdk:7
 
 MAINTAINER iocanel@gmail.com
 
-RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz | tar -xzf - -C /opt \
+USER root
+RUN yum -y install wget socat \
+    && wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz | tar -xzf - -C /opt \
     && mv /opt/zookeeper-3.4.6 /opt/zookeeper \
     && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
     && mkdir -p /opt/zookeeper/data \
-    && mkdir -p /opt/zookeeper/log 
+    && mkdir -p /opt/zookeeper/log
 
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java
 
 EXPOSE 2181 2888 3888
 
