@@ -38,9 +38,11 @@ if [ ! -z "$SERVER_ID" ]; then
     elif [ -z "$USE_BRIDGE" ]; then 
       echo "server.$i=$HOST:$PEER_PORT:$ELECTION_PORT" >> conf/zoo.cfg
     else 
-      echo "server.$i=127.0.1.$i:$PEER_PORT:$ELECTION_PORT" >> conf/zoo.cfg
-      socat TCP4-LISTEN:$PEER_PORT,bind=127.0.1.$i,fork TCP4:$PEER_HOST:$PEER_PORT &
-      socat TCP4-LISTEN:$ELECTION_PORT,bind=127.0.1.$i,fork TCP4:$ELECTION_HOST:$ELECTION_PORT &
+	    PEER_BRIDGE_PORT=$((2888+$i))
+      ELECTION_BRIDGE_PORT=$((3888+$i))
+      echo "server.$i=127.0.1.$i:$PEER_BRIDGE_PORT:$ELECTION_BRIDGE_PORT" >> conf/zoo.cfg
+      socat TCP4-LISTEN:$PEER_BRIDGE_PORT,bind=127.0.1.$i,fork TCP4:$PEER_HOST:$PEER_PORT &
+      socat TCP4-LISTEN:$ELECTION_BRIDGE_PORT,bind=127.0.1.$i,fork TCP4:$ELECTION_HOST:$ELECTION_PORT &
     fi
 
   done
