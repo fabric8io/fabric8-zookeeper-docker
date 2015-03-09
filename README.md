@@ -10,7 +10,7 @@ Getting Started
 The easiest way to make use of this image is to use the "setup-ensemble.sh" script which is part of this repo. The script provides an easy way to start ZooKeeper Ensembles of variable size, without having to go through the pain of manually setting up env variables. For example
 
 - To create a 3 server ensemble:
-	./setup-ensmble.sh 3 [docker ip]
+	./setup-ensemble.sh 3 [docker ip]
 
 - To create a 5 server ensemble:
 	./setup-ensemble.sh 5 [docker ip]
