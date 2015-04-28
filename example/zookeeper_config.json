@@ -1,0 +1,202 @@
+{
+  "kind": "List",
+  "apiVersion": "v1beta1",
+  "id": "zookeper",
+  "items":[
+    {
+      "kind": "Service",
+      "apiVersion": "v1beta3",
+      "metadata": {
+        "name": "zookeeper-1",
+        "labels": {
+          "name": "zookeeper-1"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "client",
+            "port": 2181,
+            "targetPort": 2181
+          },
+          {
+            "name": "followers",
+            "port": 2888,
+            "targetPort": 2888
+          },
+          {
+            "name": "election",
+            "port": 3888,
+            "targetPort": 3888
+          }
+        ],
+        "selector": {
+          "server-id": "1"
+        }
+      }
+    },
+    {
+      "kind": "Service",
+      "apiVersion": "v1beta3",
+      "metadata": {
+        "name": "zookeeper-2",
+        "labels": {
+          "name": "zookeeper-2"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "client",
+            "port": 2181,
+            "targetPort": 2181
+          },
+          {
+            "name": "followers",
+            "port": 2888,
+            "targetPort": 2888
+          },
+          {
+            "name": "election",
+            "port": 3888,
+            "targetPort": 3888
+          }
+        ],
+        "selector": {
+          "server-id": "2"
+        }
+      }
+    },
+    {
+      "kind": "Service",
+      "apiVersion": "v1beta3",
+      "metadata": {
+        "name": "zookeeper-3",
+        "labels": {
+          "name": "zookeeper-3"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "client",
+            "port": 2181,
+            "targetPort": 2181
+          },
+          {
+            "name": "followers",
+            "port": 2888,
+            "targetPort": 2888
+          },
+          {
+            "name": "election",
+            "port": 3888,
+            "targetPort": 3888
+          }
+        ],
+        "selector": {
+          "server-id": "3"
+        }
+      }
+    },
+    {
+      "kind": "Pod",
+      "apiVersion": "v1beta3",
+      "metadata": {
+        "name": "zookeeper-1",
+        "labels": {
+          "name": "zookeeper",
+          "server-id": "1"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "server",
+            "image": "zookeeper",
+            "env":[
+              { "name": "SERVER_ID", "value": "1" }
+            ],
+            "ports":[
+              {
+                "containerPort": 2181
+              },
+              {
+                "containerPort": 2888
+              },
+              {
+                "containerPort": 3888
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "Pod",
+      "apiVersion": "v1beta3",
+      "metadata": {
+        "name": "zookeeper-2",
+        "labels": {
+          "name": "zookeeper",
+          "server-id": "2"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "server",
+            "image": "zookeeper",
+            "env":[
+              { "name": "SERVER_ID", "value": "2" }
+            ],
+            "ports":[
+              {
+                "containerPort": 2181
+              },
+              {
+                "containerPort": 2888
+              },
+              {
+                "containerPort": 3888
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kind": "Pod",
+      "apiVersion": "v1beta3",
+      "metadata": {
+        "name": "zookeeper-3",
+        "labels": {
+          "name": "zookeeper",
+          "server-id": "3"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "server",
+            "image": "zookeeper",
+            "env":[
+              { "name": "SERVER_ID", "value": "3" }
+            ],
+            "ports":[
+              {
+                "containerPort": 2181
+              },
+              {
+                "containerPort": 2888
+              },
+              {
+                "containerPort": 3888
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
