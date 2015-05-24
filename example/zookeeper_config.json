@@ -115,7 +115,8 @@
             "name": "server",
             "image": "zookeeper",
             "env":[
-              { "name": "SERVER_ID", "value": "1" }
+              { "name": "SERVER_ID", "value": "1" },
+              { "name": "MAX_SERVERS", "value": "3" }
             ],
             "ports":[
               {
@@ -148,7 +149,8 @@
             "name": "server",
             "image": "zookeeper",
             "env":[
-              { "name": "SERVER_ID", "value": "2" }
+              { "name": "SERVER_ID", "value": "2" },
+              { "name": "MAX_SERVERS", "value": "3" }
             ],
             "ports":[
               {
@@ -181,7 +183,8 @@
             "name": "server",
             "image": "zookeeper",
             "env":[
-              { "name": "SERVER_ID", "value": "3" }
+              { "name": "SERVER_ID", "value": "3" },
+              { "name": "MAX_SERVERS", "value": "3" }
             ],
             "ports":[
               {
