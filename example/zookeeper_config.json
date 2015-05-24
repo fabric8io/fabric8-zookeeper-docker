@@ -113,7 +113,7 @@
         "containers": [
           {
             "name": "server",
-            "image": "zookeeper",
+            "image": "fabric8/zookeeper",
             "env":[
               { "name": "SERVER_ID", "value": "1" },
               { "name": "MAX_SERVERS", "value": "3" }
@@ -147,7 +147,7 @@
         "containers": [
           {
             "name": "server",
-            "image": "zookeeper",
+            "image": "fabric8/zookeeper",
             "env":[
               { "name": "SERVER_ID", "value": "2" },
               { "name": "MAX_SERVERS", "value": "3" }
@@ -181,7 +181,7 @@
         "containers": [
           {
             "name": "server",
-            "image": "zookeeper",
+            "image": "fabric8/zookeeper",
             "env":[
               { "name": "SERVER_ID", "value": "3" },
               { "name": "MAX_SERVERS", "value": "3" }
