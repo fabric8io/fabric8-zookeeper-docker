@@ -7,7 +7,11 @@ if [ ! -z "$SERVER_ID" ] && [ ! -z "$MAX_SERVERS" ]; then
   echo "" >> /opt/zookeeper/conf/zoo.cfg
   echo "#Server List" >> /opt/zookeeper/conf/zoo.cfg
   for i in $( eval echo {1..$MAX_SERVERS});do
-    echo "server.$i=zookeeper-$i:2888:3888" >> /opt/zookeeper/conf/zoo.cfg
+    if [ "$SERVER_ID" = "$i" ];then
+      echo "server.$i=0.0.0.0:2888:3888" >> /opt/zookeeper/conf/zoo.cfg
+    else
+      echo "server.$i=zookeeper-$i:2888:3888" >> /opt/zookeeper/conf/zoo.cfg
+    fi
   done
   cat /opt/zookeeper/conf/zoo.cfg
 
